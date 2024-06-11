@@ -1519,6 +1519,14 @@ list.updateCustomTheme = new SimpleModal({
   ],
   buttonText: "update",
   onlineOnly: true,
+
+  beforeShowFn: (_thisPopup): void => {
+    document
+      .querySelector<HTMLInputElement>(
+        `form[data-popup-id=${_thisPopup.id}] input[type=text]`
+      )
+      ?.select();
+  },
   execFn: async (_thisPopup, name, updateColors): Promise<ExecReturn> => {
     const snapshot = DB.getSnapshot();
     if (!snapshot) {
